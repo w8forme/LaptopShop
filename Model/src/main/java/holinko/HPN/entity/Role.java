@@ -8,7 +8,7 @@ import java.util.Set;
  * Created by Pavel
  */
 @Entity
-@Table(name = "ROLE")
+@Table(name = "role")
 public class Role
 {
     @Id
@@ -19,8 +19,8 @@ public class Role
     @Column(name = "user_role", nullable = false)
     private String userRole;
 
-    @OneToMany(mappedBy = "role")
-    private Set<User> users = new HashSet<>();
+    @OneToMany(mappedBy = "role", cascade = CascadeType.ALL)
+    private Set<Customer> customers = new HashSet<>();
 
     public Role()
     {
@@ -46,14 +46,14 @@ public class Role
         this.userRole = userRole;
     }
 
-    public Set<User> getUsers()
+    public Set<Customer> getCustomers()
     {
-        return users;
+        return customers;
     }
 
-    public void setUsers(Set<User> users)
+    public void setCustomers(Set<Customer> customers)
     {
-        this.users = users;
+        this.customers = customers;
     }
 
     @Override
@@ -62,7 +62,6 @@ public class Role
         return "Role{" +
                 "id=" + id +
                 ", userRole='" + userRole + '\'' +
-                ", users=" + users +
                 '}';
     }
 }

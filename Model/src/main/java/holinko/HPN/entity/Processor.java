@@ -8,7 +8,7 @@ import java.util.Set;
  * Created by Pavel
  */
 @Entity
-@Table(name = "PROCESSOR")
+@Table(name = "processor")
 public class Processor
 {
     @Id

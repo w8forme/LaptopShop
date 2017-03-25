@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by Pavel
  */
-public interface SorageService
+public interface StorageService
 {
     List<Storage> getAll();
     Storage findById(Long id);

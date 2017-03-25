@@ -1,6 +1,6 @@
 package holinko.HPN.dal.impl;
 
-import holinko.HPN.dal.SorageService;
+import holinko.HPN.dal.StorageService;
 import holinko.HPN.entity.Storage;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
@@ -16,9 +16,9 @@ import java.util.List;
  */
 @Transactional
 @Repository("storageDao")
-public class SorageServiceImpl implements SorageService
+public class StorageServiceImpl implements StorageService
 {
-    private static final Logger LOGGER = LoggerFactory.getLogger(SorageServiceImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(StorageServiceImpl.class);
     private SessionFactory sessionFactory;
 
     @Resource(name = "sessionFactory")
@@ -29,7 +29,7 @@ public class SorageServiceImpl implements SorageService
     @Override
     public List<Storage> getAll()
     {
-        return sessionFactory.getCurrentSession().createQuery("from STORAGE").list();
+        return sessionFactory.getCurrentSession().createQuery("from Storage").list();
     }
 
     @Override

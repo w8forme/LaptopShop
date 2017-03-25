@@ -6,15 +6,15 @@ import javax.persistence.*;
  * Created by Pavel
  */
 @Entity
-@Table(name = "USER")
-public class User
+@Table(name = "customer")
+public class Customer
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "login", nullable = false)
+    @Column(name = "login", unique = true, nullable = false)
     private String login;
 
     @Column(name = "password", nullable = false)
@@ -24,7 +24,7 @@ public class User
     @JoinColumn(name = "role_id")
     private Role role;
 
-    public User()
+    public Customer()
     {
     }
 
@@ -71,7 +71,7 @@ public class User
     @Override
     public String toString()
     {
-        return "User{" +
+        return "Customer{" +
                 "id=" + id +
                 ", login='" + login + '\'' +
                 ", password='" + password + '\'' +

@@ -6,7 +6,7 @@ import javax.persistence.*;
  * Created by Pavel
  */
 @Entity
-@Table(name = "PRODUCT")
+@Table(name = "product")
 public class Product
 {
     @Id
@@ -23,7 +23,7 @@ public class Product
     private Ram ram;
 
     @ManyToOne
-    @JoinColumn(name = "processor_id")
+    @JoinColumn(name = "processor_type_id")
     private Processor processor;
 
     @ManyToOne
