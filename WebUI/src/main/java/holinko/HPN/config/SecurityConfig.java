@@ -1,9 +1,6 @@
 package holinko.HPN.config;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -19,8 +16,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 @ComponentScan("holinko.HPN")
 public class SecurityConfig extends WebSecurityConfigurerAdapter
 {
-
-    //private static final Logger logger = LoggerFactory.getLogger(SecurityConfig.class);
 
     @Autowired
     private UserDetailsService userDetailsService;
@@ -43,12 +38,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
                 .anyRequest().permitAll()
                 .and();
 
+        http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/403");
+
         http.authorizeRequests().
                 antMatchers("/accountInfo")
                 .access("hasAuthority('ADMIN', 'CUSTOMER')");
 
         http.formLogin()
                 .loginPage("/login")
+                .defaultSuccessUrl("/products")
                 .loginProcessingUrl("/j_spring_security_check")
                 .failureUrl("/login?error")
                 .usernameParameter("j_username")

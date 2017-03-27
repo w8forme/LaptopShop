@@ -36,7 +36,7 @@
         <h2 class="form-signin-heading">Please sign in</h2>
         <input type="text" class="form-control" name="j_username" placeholder="User name" required autofocus value="">
         <input type="password" class="form-control" name="j_password" placeholder="Password" required value="">
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Войти</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Enter</button>
     </form>
 </div>
 

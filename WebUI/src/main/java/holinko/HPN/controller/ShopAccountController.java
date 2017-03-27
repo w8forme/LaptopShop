@@ -23,30 +23,39 @@ public class ShopAccountController
     @Autowired
     private ShopManager shopManager;
 
-    @RequestMapping(value = "/products", method = RequestMethod.GET)
+    @RequestMapping(value = "/products", method = {RequestMethod.GET, RequestMethod.POST})
     public String getAllLaptops(Model model)
     {
         LOGGER.info("Get all laptops");
         model.addAttribute("storages", shopManager.showLaptops());
-        return "products";
+        return "/products";
     }
 
-    @RequestMapping(value = "/buyProduct", method = RequestMethod.GET)
+    @RequestMapping(value = {"/buyProduct", "/deleteproduct"}, method = RequestMethod.POST)
     public String buyLaptop(@RequestParam(value = "id", defaultValue = "") Long id, Model model)
     {
         if (null != id && id > 0)
         {
-            LOGGER.info("Buying laptop");
+            LOGGER.info("Buying laptop id: " + id);
             shopManager.buyLaptop(id);
         }
-        return "products";
+        LOGGER.info("Buying laptop id: " + id);
+        return "redirect:/products";
     }
 
-    @RequestMapping(value = {"/addproduct", "/deleteproduct"}, method = RequestMethod.GET)
+    @RequestMapping(value = "/addproduct", method = RequestMethod.POST)
     public String addLaptop(@RequestParam(value = "id", defaultValue = "") Long id, Model model)
     {
         LOGGER.info("Adding laptop");
         shopManager.addLaptop(id);
-        return "products";
+        return "redirect:/products";
+    }
+
+    @RequestMapping(value = "/editproduct", method = RequestMethod.POST)
+    public String editLaptop(@RequestParam(value = "id", defaultValue = "") Long id, Model model)
+    {
+        LOGGER.info("Adding laptop");
+        shopManager.addLaptop(id);
+        return "redirect:/products";
     }
 }

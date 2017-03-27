@@ -1,7 +1,9 @@
 package holinko.HPN.controller;
 
 
+import java.awt.image.BufferedImage;
 import java.io.BufferedOutputStream;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.ui.Model;
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -36,9 +39,7 @@ public class FileUploadController
      * Upload single file using Spring Controller
      */
     @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
-    public
-    @ResponseBody
-    String uploadFileHandler(@RequestParam(value = "id", defaultValue = "") Long id,
+    public String uploadFileHandler(@RequestParam(value = "id", defaultValue = "") Long id,
                              @RequestParam("file") MultipartFile file, Model model,
                              HttpServletRequest request)
     {
@@ -47,10 +48,11 @@ public class FileUploadController
             String name = file.getOriginalFilename();
             try
             {
+
                 byte[] bytes = file.getBytes();
 
                 // Creating the directory to store file
-                String rootPath = request.getServletContext().getRealPath("");
+                String rootPath = request.getSession().getServletContext().getRealPath("/pages");
 
                 File dir = new File(rootPath + File.separator + "tmpFiles");
                 if (!dir.exists())
@@ -65,13 +67,10 @@ public class FileUploadController
                 stream.close();
 
                 LOGGER.info("Server File AbsoluteLocation=" + serverFile.getAbsolutePath());
-                LOGGER.info("Server File Location=" + serverFile.getPath());
-                LOGGER.info("Server File CanonicalLocation=" + serverFile.getCanonicalPath());
                 LOGGER.info("product id" + id);
-                shopManager.addPhoto(id, serverFile.getCanonicalPath());
+                shopManager.addPhoto(id, serverFile.getName());
 
-                return name;
-                //return "You successfully uploaded file=" + name;
+                return "redirect:/products";
             } catch (Exception e)
             {
                 return "You failed to upload " + name + " => " + e.getMessage();
