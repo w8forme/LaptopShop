@@ -81,6 +81,7 @@
 </c:forEach>
 <br/>
 </sec:authorize>
+<jsp:include page="_footer.jsp"/>
 </body>
 </html>
 

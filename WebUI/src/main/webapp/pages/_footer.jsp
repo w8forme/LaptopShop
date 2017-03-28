@@ -4,6 +4,6 @@
 
 <div class="footer-container">
 
-    @Copy right <a href="Pavel.net" target="_blank">Pavel</a>
+    @Copy right <a href="/products">Pavel</a>
 
 </div>

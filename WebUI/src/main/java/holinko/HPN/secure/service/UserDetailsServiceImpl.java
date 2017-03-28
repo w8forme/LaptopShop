@@ -16,14 +16,16 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Service("userDetailsService")
-public class UserDetailsServiceImpl implements UserDetailsService {
+public class UserDetailsServiceImpl implements UserDetailsService
+{
 
     @Autowired
     private UserManager userManager;
 
     @Override
     @Transactional(readOnly = true)
-    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException
+    {
         Customer user = userManager.findUserByName(s);
         Set<GrantedAuthority> roles = new HashSet();
         roles.add(new SimpleGrantedAuthority(user.getRole().getUserRole()));

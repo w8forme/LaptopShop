@@ -15,17 +15,20 @@ import org.springframework.web.servlet.view.JstlView;
 @Configuration
 @EnableWebMvc
 @ComponentScan("holinko.HPN")
-public class WebAppConfig extends WebMvcConfigurerAdapter {
+public class WebAppConfig extends WebMvcConfigurerAdapter
+{
 
     // It allows you to see all the resources in the folder pages
     @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+    public void addResourceHandlers(ResourceHandlerRegistry registry)
+    {
         registry.addResourceHandler("/pages/**").addResourceLocations("/pages/");
     }
 
     // initializes View
     @Bean
-    public InternalResourceViewResolver setupViewResolver() {
+    public InternalResourceViewResolver setupViewResolver()
+    {
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
         resolver.setPrefix("/pages/");
         resolver.setSuffix(".jsp");
@@ -35,14 +38,16 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
     }
 
     @Bean
-    public CommonsMultipartResolver multipartResolver() {
+    public CommonsMultipartResolver multipartResolver()
+    {
         CommonsMultipartResolver resolver = new CommonsMultipartResolver();
         resolver.setDefaultEncoding("utf-8");
         return resolver;
     }
 
     @Bean
-    public UserDetailsService getUserDetailsService(){
+    public UserDetailsService getUserDetailsService()
+    {
         return new UserDetailsServiceImpl();
     }
 }

@@ -10,5 +10,6 @@ import org.springframework.context.annotation.ImportResource;
 @Configuration
 @ComponentScan(value = "holinko.HPN.managers")
 @ImportResource(value = "classpath:app-context-annotation.xml")
-public class BlConfiguration {
+public class BlConfiguration
+{
 }

@@ -1,0 +1,10 @@
+INSERT INTO public.processor (id, proc_name) VALUES (1, 'Intel Celeron');
+INSERT INTO public.processor (id, proc_name) VALUES (3, 'Intel Core i3');
+INSERT INTO public.processor (id, proc_name) VALUES (4, 'Intel Core i5');
+INSERT INTO public.processor (id, proc_name) VALUES (6, 'AMD Opteron');
+INSERT INTO public.processor (id, proc_name) VALUES (7, 'AMD Phenom');
+INSERT INTO public.processor (id, proc_name) VALUES (9, 'AMD Sempron');
+INSERT INTO public.processor (id, proc_name) VALUES (10, 'AMD Turion');
+INSERT INTO public.processor (id, proc_name) VALUES (5, 'Intel Core i7');
+INSERT INTO public.processor (id, proc_name) VALUES (2, 'Intel Core 2');
+INSERT INTO public.processor (id, proc_name) VALUES (8, 'AMD Phenom II');

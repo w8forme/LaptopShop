@@ -1,0 +1,10 @@
+INSERT INTO public.product (id, brand_id, ram_id, processor_type_id, display_id) VALUES (1, 5, 8, 3, 3);
+INSERT INTO public.product (id, brand_id, ram_id, processor_type_id, display_id) VALUES (3, 2, 9, 4, 4);
+INSERT INTO public.product (id, brand_id, ram_id, processor_type_id, display_id) VALUES (6, 5, 3, 1, 6);
+INSERT INTO public.product (id, brand_id, ram_id, processor_type_id, display_id) VALUES (7, 3, 1, 6, 7);
+INSERT INTO public.product (id, brand_id, ram_id, processor_type_id, display_id) VALUES (8, 4, 2, 7, 3);
+INSERT INTO public.product (id, brand_id, ram_id, processor_type_id, display_id) VALUES (10, 6, 4, 9, 2);
+INSERT INTO public.product (id, brand_id, ram_id, processor_type_id, display_id) VALUES (2, 6, 4, 10, 2);
+INSERT INTO public.product (id, brand_id, ram_id, processor_type_id, display_id) VALUES (4, 3, 5, 5, 5);
+INSERT INTO public.product (id, brand_id, ram_id, processor_type_id, display_id) VALUES (5, 1, 7, 2, 1);
+INSERT INTO public.product (id, brand_id, ram_id, processor_type_id, display_id) VALUES (9, 5, 3, 8, 8);

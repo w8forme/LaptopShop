@@ -47,9 +47,9 @@
 
 
 
-        <source.version>1.7</source.version>
-        <target.version>1.7</target.version>
-        <compiler.version>1.7</compiler.version>
+        <source.version>1.8</source.version>
+        <target.version>1.8</target.version>
+        <compiler.version>1.8</compiler.version>
         <encoding.compiler>utf-8</encoding.compiler>
         <useIncrementalCompilation.value>false</useIncrementalCompilation.value>
 

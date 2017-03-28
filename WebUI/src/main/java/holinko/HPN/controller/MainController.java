@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/")
-public class MainController {
+public class MainController
+{
 
     @Autowired
     private UserManager userManager;
@@ -23,7 +24,7 @@ public class MainController {
     }
 
     @RequestMapping(value = "/accountinfo")
-    public String getAccinfo(@RequestParam(value = "name", defaultValue = "")String name, Model model)
+    public String getAccinfo(@RequestParam(value = "name", defaultValue = "") String name, Model model)
     {
         Customer customer = userManager.findUserByName(name);
         model.addAttribute("customer", customer);
