@@ -1,0 +1,695 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.6.2
+-- Dumped by pg_dump version 9.6.2
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET row_security = off;
+
+DROP DATABASE IF EXISTS "LaptopShop";
+--
+-- Name: LaptopShop; Type: DATABASE; Schema: -; Owner: postgres
+--
+
+CREATE DATABASE "LaptopShop" WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'Russian_Russia.1251' LC_CTYPE = 'Russian_Russia.1251';
+
+
+ALTER DATABASE "LaptopShop" OWNER TO postgres;
+
+\connect "LaptopShop"
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: brand; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE brand (
+    id bigint NOT NULL,
+    brand_name text NOT NULL
+);
+
+
+ALTER TABLE brand OWNER TO postgres;
+
+--
+-- Name: BRAND_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE "BRAND_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE "BRAND_id_seq" OWNER TO postgres;
+
+--
+-- Name: BRAND_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE "BRAND_id_seq" OWNED BY brand.id;
+
+
+--
+-- Name: display; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE display (
+    id bigint NOT NULL,
+    display_size text NOT NULL
+);
+
+
+ALTER TABLE display OWNER TO postgres;
+
+--
+-- Name: DISPLAY_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE "DISPLAY_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE "DISPLAY_id_seq" OWNER TO postgres;
+
+--
+-- Name: DISPLAY_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE "DISPLAY_id_seq" OWNED BY display.id;
+
+
+--
+-- Name: processor; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE processor (
+    id bigint NOT NULL,
+    proc_name text NOT NULL
+);
+
+
+ALTER TABLE processor OWNER TO postgres;
+
+--
+-- Name: PROCESSOR_TYPE_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE "PROCESSOR_TYPE_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE "PROCESSOR_TYPE_id_seq" OWNER TO postgres;
+
+--
+-- Name: PROCESSOR_TYPE_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE "PROCESSOR_TYPE_id_seq" OWNED BY processor.id;
+
+
+--
+-- Name: product; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE product (
+    id bigint NOT NULL,
+    brand_id bigint NOT NULL,
+    ram_id bigint NOT NULL,
+    processor_type_id bigint NOT NULL,
+    display_id bigint NOT NULL
+);
+
+
+ALTER TABLE product OWNER TO postgres;
+
+--
+-- Name: PRODUCT_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE "PRODUCT_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE "PRODUCT_id_seq" OWNER TO postgres;
+
+--
+-- Name: PRODUCT_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE "PRODUCT_id_seq" OWNED BY product.id;
+
+
+--
+-- Name: ram; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE ram (
+    id bigint NOT NULL,
+    ram_size text NOT NULL
+);
+
+
+ALTER TABLE ram OWNER TO postgres;
+
+--
+-- Name: RAM_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE "RAM_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE "RAM_id_seq" OWNER TO postgres;
+
+--
+-- Name: RAM_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE "RAM_id_seq" OWNED BY ram.id;
+
+
+--
+-- Name: role; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE role (
+    id bigint NOT NULL,
+    user_role text NOT NULL
+);
+
+
+ALTER TABLE role OWNER TO postgres;
+
+--
+-- Name: ROLE_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE "ROLE_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE "ROLE_id_seq" OWNER TO postgres;
+
+--
+-- Name: ROLE_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE "ROLE_id_seq" OWNED BY role.id;
+
+
+--
+-- Name: storage; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE storage (
+    id bigint NOT NULL,
+    amount integer NOT NULL,
+    price numeric NOT NULL,
+    photo text,
+    product_id integer NOT NULL
+);
+
+
+ALTER TABLE storage OWNER TO postgres;
+
+--
+-- Name: STORAGE_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE "STORAGE_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE "STORAGE_id_seq" OWNER TO postgres;
+
+--
+-- Name: STORAGE_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE "STORAGE_id_seq" OWNED BY storage.id;
+
+
+--
+-- Name: customer; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE customer (
+    id bigint NOT NULL,
+    login text NOT NULL,
+    password text NOT NULL,
+    role_id bigint NOT NULL
+);
+
+
+ALTER TABLE customer OWNER TO postgres;
+
+--
+-- Name: USER_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE "USER_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE "USER_id_seq" OWNER TO postgres;
+
+--
+-- Name: USER_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE "USER_id_seq" OWNED BY customer.id;
+
+
+--
+-- Name: brand id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY brand ALTER COLUMN id SET DEFAULT nextval('"BRAND_id_seq"'::regclass);
+
+
+--
+-- Name: customer id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY customer ALTER COLUMN id SET DEFAULT nextval('"USER_id_seq"'::regclass);
+
+
+--
+-- Name: display id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY display ALTER COLUMN id SET DEFAULT nextval('"DISPLAY_id_seq"'::regclass);
+
+
+--
+-- Name: processor id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY processor ALTER COLUMN id SET DEFAULT nextval('"PROCESSOR_TYPE_id_seq"'::regclass);
+
+
+--
+-- Name: product id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY product ALTER COLUMN id SET DEFAULT nextval('"PRODUCT_id_seq"'::regclass);
+
+
+--
+-- Name: ram id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY ram ALTER COLUMN id SET DEFAULT nextval('"RAM_id_seq"'::regclass);
+
+
+--
+-- Name: role id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY role ALTER COLUMN id SET DEFAULT nextval('"ROLE_id_seq"'::regclass);
+
+
+--
+-- Name: storage id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY storage ALTER COLUMN id SET DEFAULT nextval('"STORAGE_id_seq"'::regclass);
+
+
+--
+-- Name: BRAND_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('"BRAND_id_seq"', 13, true);
+
+
+--
+-- Name: DISPLAY_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('"DISPLAY_id_seq"', 15, true);
+
+
+--
+-- Name: PROCESSOR_TYPE_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('"PROCESSOR_TYPE_id_seq"', 17, true);
+
+
+--
+-- Name: PRODUCT_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('"PRODUCT_id_seq"', 18, true);
+
+
+--
+-- Name: RAM_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('"RAM_id_seq"', 17, true);
+
+
+--
+-- Name: ROLE_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('"ROLE_id_seq"', 6, true);
+
+
+--
+-- Name: STORAGE_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('"STORAGE_id_seq"', 17, true);
+
+
+--
+-- Name: USER_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('"USER_id_seq"', 7, true);
+
+
+--
+-- Data for Name: brand; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO brand (id, brand_name) VALUES (2, 'Acer');
+INSERT INTO brand (id, brand_name) VALUES (4, 'Hp');
+INSERT INTO brand (id, brand_name) VALUES (6, 'Lenovo');
+INSERT INTO brand (id, brand_name) VALUES (3, 'Apple');
+INSERT INTO brand (id, brand_name) VALUES (1, 'Asus');
+INSERT INTO brand (id, brand_name) VALUES (5, 'Dell');
+
+
+--
+-- Data for Name: customer; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO customer (id, login, password, role_id) VALUES (1, 'john12', 'qwerty', 1);
+INSERT INTO customer (id, login, password, role_id) VALUES (2, 'admin', 'superadmin', 2);
+INSERT INTO customer (id, login, password, role_id) VALUES (3, 'billy', '123billy', 1);
+INSERT INTO customer (id, login, password, role_id) VALUES (7, 'Alex', '123', 6);
+
+
+--
+-- Data for Name: display; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO display (id, display_size) VALUES (3, '15 to 15.9 Inches');
+INSERT INTO display (id, display_size) VALUES (4, '14 to 14.9 Inches');
+INSERT INTO display (id, display_size) VALUES (6, '12 to 12.9 Inches');
+INSERT INTO display (id, display_size) VALUES (7, '11 to 11.9 Inches');
+INSERT INTO display (id, display_size) VALUES (2, '16 to 16.9 Inches');
+INSERT INTO display (id, display_size) VALUES (5, '13 to 13.9 Inches');
+INSERT INTO display (id, display_size) VALUES (1, '17 Inches');
+INSERT INTO display (id, display_size) VALUES (8, '11 Inches');
+
+
+--
+-- Data for Name: processor; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO processor (id, proc_name) VALUES (1, 'Intel Celeron');
+INSERT INTO processor (id, proc_name) VALUES (3, 'Intel Core i3');
+INSERT INTO processor (id, proc_name) VALUES (4, 'Intel Core i5');
+INSERT INTO processor (id, proc_name) VALUES (6, 'AMD Opteron');
+INSERT INTO processor (id, proc_name) VALUES (7, 'AMD Phenom');
+INSERT INTO processor (id, proc_name) VALUES (9, 'AMD Sempron');
+INSERT INTO processor (id, proc_name) VALUES (10, 'AMD Turion');
+INSERT INTO processor (id, proc_name) VALUES (5, 'Intel Core i7');
+INSERT INTO processor (id, proc_name) VALUES (2, 'Intel Core 2');
+INSERT INTO processor (id, proc_name) VALUES (8, 'AMD Phenom II');
+
+
+--
+-- Data for Name: product; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO product (id, brand_id, ram_id, processor_type_id, display_id) VALUES (1, 5, 8, 3, 3);
+INSERT INTO product (id, brand_id, ram_id, processor_type_id, display_id) VALUES (3, 2, 9, 4, 4);
+INSERT INTO product (id, brand_id, ram_id, processor_type_id, display_id) VALUES (6, 5, 3, 1, 6);
+INSERT INTO product (id, brand_id, ram_id, processor_type_id, display_id) VALUES (7, 3, 1, 6, 7);
+INSERT INTO product (id, brand_id, ram_id, processor_type_id, display_id) VALUES (8, 4, 2, 7, 3);
+INSERT INTO product (id, brand_id, ram_id, processor_type_id, display_id) VALUES (10, 6, 4, 9, 2);
+INSERT INTO product (id, brand_id, ram_id, processor_type_id, display_id) VALUES (2, 6, 4, 10, 2);
+INSERT INTO product (id, brand_id, ram_id, processor_type_id, display_id) VALUES (4, 3, 5, 5, 5);
+INSERT INTO product (id, brand_id, ram_id, processor_type_id, display_id) VALUES (5, 1, 7, 2, 1);
+INSERT INTO product (id, brand_id, ram_id, processor_type_id, display_id) VALUES (9, 5, 3, 8, 8);
+
+
+--
+-- Data for Name: ram; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO ram (id, ram_size) VALUES (2, '32 GB');
+INSERT INTO ram (id, ram_size) VALUES (6, '8 GB');
+INSERT INTO ram (id, ram_size) VALUES (8, '4 GB');
+INSERT INTO ram (id, ram_size) VALUES (9, '3 GB');
+INSERT INTO ram (id, ram_size) VALUES (1, '64 GB');
+INSERT INTO ram (id, ram_size) VALUES (10, '2 GB');
+INSERT INTO ram (id, ram_size) VALUES (4, '16 GB');
+INSERT INTO ram (id, ram_size) VALUES (5, '12 GB');
+INSERT INTO ram (id, ram_size) VALUES (7, '6 GB');
+INSERT INTO ram (id, ram_size) VALUES (3, '24 GB');
+
+
+--
+-- Data for Name: role; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO role (id, user_role) VALUES (1, 'CUSTOMER');
+INSERT INTO role (id, user_role) VALUES (2, 'ADMIN');
+INSERT INTO role (id, user_role) VALUES (6, 'TEST_ROLE');
+
+
+--
+-- Data for Name: storage; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO storage (id, amount, price, photo, product_id) VALUES (4, 9, 11300, '3.jpg', 10);
+INSERT INTO storage (id, amount, price, photo, product_id) VALUES (6, 7, 6300, '4.jpg', 8);
+INSERT INTO storage (id, amount, price, photo, product_id) VALUES (8, 16, 8300, '5.jpg', 6);
+INSERT INTO storage (id, amount, price, photo, product_id) VALUES (7, 12, 3200, '6.jpg', 7);
+INSERT INTO storage (id, amount, price, photo, product_id) VALUES (10, 5, 4500, '7.jpg', 3);
+INSERT INTO storage (id, amount, price, photo, product_id) VALUES (3, 6, 6900, '2.jpg', 2);
+INSERT INTO storage (id, amount, price, photo, product_id) VALUES (9, 10, 6500, '8.jpg', 4);
+INSERT INTO storage (id, amount, price, photo, product_id) VALUES (2, 20, 7200, '9.jpg', 5);
+INSERT INTO storage (id, amount, price, photo, product_id) VALUES (5, 0, 9900, '10.jpg', 9);
+INSERT INTO storage (id, amount, price, photo, product_id) VALUES (1, 9, 5000, '1.jpg', 1);
+
+
+--
+-- Name: brand BRAND_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY brand
+    ADD CONSTRAINT "BRAND_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: display DISPLAY_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY display
+    ADD CONSTRAINT "DISPLAY_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: processor PROCESSOR_TYPE_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY processor
+    ADD CONSTRAINT "PROCESSOR_TYPE_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: product PRODUCT_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY product
+    ADD CONSTRAINT "PRODUCT_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: ram RAM_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY ram
+    ADD CONSTRAINT "RAM_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: role ROLE_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY role
+    ADD CONSTRAINT "ROLE_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: storage STORAGE_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY storage
+    ADD CONSTRAINT "STORAGE_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: storage STORAGE_product_id_key1; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY storage
+    ADD CONSTRAINT "STORAGE_product_id_key1" UNIQUE (product_id);
+
+
+--
+-- Name: customer USER_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY customer
+    ADD CONSTRAINT "USER_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: USER_login_uindex; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE UNIQUE INDEX "USER_login_uindex" ON customer USING btree (login);
+
+
+--
+-- Name: fk; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX fk ON customer USING btree (role_id);
+
+
+--
+-- Name: fkey; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX fkey ON product USING btree (brand_id);
+
+
+--
+-- Name: product PRODUCT_brand_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY product
+    ADD CONSTRAINT "PRODUCT_brand_id_fkey" FOREIGN KEY (brand_id) REFERENCES brand(id);
+
+
+--
+-- Name: product PRODUCT_display_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY product
+    ADD CONSTRAINT "PRODUCT_display_id_fkey" FOREIGN KEY (display_id) REFERENCES display(id);
+
+
+--
+-- Name: product PRODUCT_processor_type_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY product
+    ADD CONSTRAINT "PRODUCT_processor_type_id_fkey" FOREIGN KEY (processor_type_id) REFERENCES processor(id);
+
+
+--
+-- Name: product PRODUCT_ram_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY product
+    ADD CONSTRAINT "PRODUCT_ram_id_fkey" FOREIGN KEY (ram_id) REFERENCES ram(id);
+
+
+--
+-- Name: storage STORAGE_product_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY storage
+    ADD CONSTRAINT "STORAGE_product_id_fkey" FOREIGN KEY (product_id) REFERENCES product(id);
+
+
+--
+-- Name: customer USER_role_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY customer
+    ADD CONSTRAINT "USER_role_id_fkey" FOREIGN KEY (role_id) REFERENCES role(id);
+
+
+--
+-- PostgreSQL database dump complete
+--
+

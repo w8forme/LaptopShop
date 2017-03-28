@@ -2,6 +2,8 @@ package holinko.HPN.dal.impl;
 
 import holinko.HPN.dal.UserService;
 import holinko.HPN.entity.Customer;
+import holinko.HPN.entity.Role;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,23 +25,41 @@ public class CustomerServiceImplTest
     @Autowired
     private UserService userService;
 
-
-    @Before
-    public void setUp() throws Exception
+    @Test
+    public void testFindByName() throws Exception
     {
-
+        LOGGER.info("Find user by name");
+        Customer customerForAdd = new Customer();
+        customerForAdd.setLogin("Alex");
+        customerForAdd.setPassword("123");
+        Role role = new Role();
+        role.setUserRole("TEST_ROLE");
+        role.getCustomers().add(customerForAdd);
+        customerForAdd.setRole(role);
+        LOGGER.info(role.toString());
+        userService.save(customerForAdd);
+        Customer customerAfterAdd = userService.findByName("Alex");
+        Assert.assertEquals(customerForAdd.getLogin(), customerAfterAdd.getLogin());
+        Assert.assertEquals(customerForAdd.getPassword(), customerAfterAdd.getPassword());
+        Assert.assertEquals(customerForAdd.getRole().getUserRole(), customerAfterAdd.getRole().getUserRole());
     }
 
     @Test
-    public void findByName() throws Exception
+    public void testSave() throws Exception
     {
-        Customer user = userService.findByName("john12");
-        System.out.println("user dao: " + user);
-    }
-
-    @Test
-    public void save() throws Exception
-    {
-
+        LOGGER.info("Test user save");
+        Customer customerForSave = new Customer();
+        customerForSave.setLogin("Max");
+        customerForSave.setPassword("12345");
+        Role role = new Role();
+        role.setUserRole("TEST_ROLE");
+        role.getCustomers().add(customerForSave);
+        customerForSave.setRole(role);
+        LOGGER.info(role.toString());
+        userService.save(customerForSave);
+        Customer customerAfterSave = userService.findByName("Max");
+        Assert.assertEquals(customerForSave.getLogin(), customerAfterSave.getLogin());
+        Assert.assertEquals(customerForSave.getPassword(), customerAfterSave.getPassword());
+        Assert.assertEquals(customerForSave.getRole().getUserRole(), customerAfterSave.getRole().getUserRole());
     }
 }

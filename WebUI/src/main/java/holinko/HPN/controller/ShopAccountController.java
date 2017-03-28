@@ -31,7 +31,7 @@ public class ShopAccountController
         return "/products";
     }
 
-    @RequestMapping(value = {"/buyProduct", "/deleteproduct"}, method = RequestMethod.POST)
+    @RequestMapping(value = {"/buyProduct", "/deleteproduct"}, method = {RequestMethod.GET, RequestMethod.POST})
     public String buyLaptop(@RequestParam(value = "id", defaultValue = "") Long id, Model model)
     {
         if (null != id && id > 0)
@@ -45,14 +45,6 @@ public class ShopAccountController
 
     @RequestMapping(value = "/addproduct", method = RequestMethod.POST)
     public String addLaptop(@RequestParam(value = "id", defaultValue = "") Long id, Model model)
-    {
-        LOGGER.info("Adding laptop");
-        shopManager.addLaptop(id);
-        return "redirect:/products";
-    }
-
-    @RequestMapping(value = "/editproduct", method = RequestMethod.POST)
-    public String editLaptop(@RequestParam(value = "id", defaultValue = "") Long id, Model model)
     {
         LOGGER.info("Adding laptop");
         shopManager.addLaptop(id);

@@ -23,7 +23,7 @@ public class Storage
     @Column(name = "photo")
     private String photo;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "product_id", unique = true, nullable = false)
     private Product product;
 
