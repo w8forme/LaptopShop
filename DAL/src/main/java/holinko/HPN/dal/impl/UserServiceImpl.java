@@ -43,4 +43,11 @@ public class UserServiceImpl implements UserService
         LOGGER.info("Customer save with id - "+ user.getId());
         return user;
     }
+
+    @Override
+    public void delete(Customer user)
+    {
+        sessionFactory.getCurrentSession().delete(user);
+        LOGGER.info("Delete user");
+    }
 }
